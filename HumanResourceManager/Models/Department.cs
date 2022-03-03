@@ -44,7 +44,7 @@ namespace HumanResourceManager.Models
             {
                 while (value < WorkerLimit*250)
                 {
-                    Console.WriteLine("Maas A.R Qanunvericiliyine uygun olaraq bir isci ucun 250 AZN den az ola bilmez");
+                    Console.WriteLine($"Maas A.R Qanunvericiliyine uygun olaraq bir isci ucun 250 AZN den az ola bilmez , Ve bu department ucun minimum {_workerlimit*250}AZN olmalidir");
                     double.TryParse(Console.ReadLine() , out value);
                 }
                 _salarylimit = value;

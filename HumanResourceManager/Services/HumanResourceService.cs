@@ -18,6 +18,14 @@ namespace HumanResourceManager.Services
         }
         public void AddDepartment(string name, int workerlimit, double salarylimit)
         {
+            foreach (Department item in _departments)
+            {
+                if ((item.Name == name.Trim().ToUpper()))
+                {
+                    Console.WriteLine("bu adda artiq department movcuddur");
+                    return;
+                }
+            }
             Array.Resize(ref _departments, _departments.Length + 1);
             _departments[_departments.Length - 1] = new Department(name, workerlimit, salarylimit);
         }
@@ -27,7 +35,7 @@ namespace HumanResourceManager.Services
             Department department = null;
             foreach (Department item in _departments)
             {
-                if(item.Name == departmentname.Trim().ToUpper()) 
+                if((item.Name == departmentname.Trim().ToUpper())) 
                 {
                     department = item;
                 }
@@ -52,8 +60,8 @@ namespace HumanResourceManager.Services
                     department.Name = newname;
                     foreach (Employee employee in department.Employees)
                     {
-                        employee.No = employee.No.Replace(employee.No[0], char.ToUpper(newname.ToString()[0]));
-                        employee.No = employee.No.Replace(employee.No[1], char.ToUpper(newname.ToString()[1]));
+                        employee.No = employee.No.Replace(employee.No[0], char.ToUpper(department.Name.ToString()[0]));
+                        employee.No = employee.No.Replace(employee.No[1], char.ToUpper(department.Name.ToString()[1]));
                     }
                     return;
                }

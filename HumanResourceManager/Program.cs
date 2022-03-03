@@ -140,15 +140,7 @@ namespace HumanResourceManager
         }
         static void ShowAllEployeers(ref HumanResourceService humanResourceManager) 
         {
-            if (humanResourceManager.Departments.Length > 0)
-            {
-                Console.WriteLine("======Departamentlerin siyahisi======");
-                foreach (Department department in humanResourceManager.Departments)
-                {
-                    Console.WriteLine(department);
-                }
-            }
-            else
+            if (humanResourceManager.Departments.Length < 0)
             {
                 Console.WriteLine("Once departament elave edin");
                 return;
@@ -165,7 +157,7 @@ namespace HumanResourceManager
                 }
                 else
                 {
-                    Console.WriteLine("Bu departmentde ishci yoxdur");
+                    Console.WriteLine("ishci yoxdur");
                     return;
                 }
             }
@@ -178,17 +170,7 @@ namespace HumanResourceManager
                 Console.WriteLine("======Departamentlerin siyahisi======");
                 foreach (Department department in humanResourceManager.Departments)
                 {
-                    if (department.Employees.Length > 0)
-                    {
-                        foreach (Employee employees in department.Employees)
-                        {
-                            Console.WriteLine(employees);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{department.Name} departamentinde ishci yoxdur");
-                    }
+                    Console.WriteLine(department);
                 }
             }
             else
@@ -196,6 +178,33 @@ namespace HumanResourceManager
                 Console.WriteLine("Once departament elave edin");
                 return;
             }
+            Console.WriteLine("Zehmet olmasa ischileri haqqinda melumat almaq istediyiniz department adini daxil edin");
+            string departmentname = Console.ReadLine();
+            while (!Regex.IsMatch(departmentname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(departmentname, @"^\S+(?: \S+)*$"))
+            {
+                Console.WriteLine("duzgun department adi daxil edin");
+                departmentname = Console.ReadLine();
+            }
+            foreach (Department department in humanResourceManager.Departments)
+            {
+                if(department.Name == departmentname.Trim().ToUpper()) 
+                {
+                    if (department.Employees.Length > 0)
+                    {
+                        foreach (Employee employee in department.Employees)
+                        {
+                            Console.WriteLine(employee);
+                        }
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("ishci yoxdur");
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine("Daxil etdiyiniz adda department tapilmadi");
         }
 
         static void AddEmployee(ref HumanResourceService humanResourceManager) 
@@ -224,7 +233,7 @@ namespace HumanResourceManager
             Console.WriteLine("ishcinin AD VE SOYADINI DAXIL EDIN");
             string fullname = Console.ReadLine();
 
-            while (!Regex.IsMatch(fullname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(fullname, @"^\S+(?: \S+)*$"))
+            while (!Regex.IsMatch(fullname, @"^\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+"))
             {
                 Console.WriteLine("ishcinin AD VE SOYADINI DUZGUN DAXIL EDIN");
                 fullname = Console.ReadLine();
@@ -263,6 +272,22 @@ namespace HumanResourceManager
             {
                 Console.WriteLine("Once Sisteme Departament elave edin");
                 return;
+            }
+            foreach (Department department in humanResourceManager.Departments)
+            {
+                if (department.Employees.Length> 0)
+                {
+                    foreach (Employee employee in department.Employees)
+                    {
+                        Console.WriteLine(employee);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Once Sisteme iSHCI Elave edin");
+                    return;
+                }   
+
             }
             Console.WriteLine("Ishcinin kodunu daxil edin");
             string no = Console.ReadLine();
@@ -313,6 +338,22 @@ namespace HumanResourceManager
             {
                 Console.WriteLine("Once Sisteme Departament elave edin");
                 return;
+            }
+            foreach (Department department in humanResourceManager.Departments)
+            {
+                if (department.Employees.Length > 0)
+                {
+                    foreach (Employee employee in department.Employees)
+                    {
+                        Console.WriteLine(employee);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sistemde ishci yoxdur");
+                    return;
+                }
+
             }
             Console.WriteLine("Ishcini Silmek istediyiniz departmentin adini daxil edin");
             string departmentname = Console.ReadLine();
