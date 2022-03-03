@@ -32,7 +32,8 @@ namespace HumanResourceManager.Models
                 while (value < 250)
                 {
                     Console.WriteLine("Maas A.R Qanunvericiliyine uygun olaraq 250 AZN den az ola bilmez");
-                    value = double.Parse(Console.ReadLine());
+                    //value = double.Parse(Console.ReadLine());
+                    double.TryParse(Console.ReadLine(), out value);
                 }
                 _salary = value;
             } 
@@ -46,6 +47,14 @@ namespace HumanResourceManager.Models
             Salary = salary;
             DepartmentName = departmentname.ToUpper();
             No = $"{(DepartmentName.ToString()[0])}{(DepartmentName.ToString()[1])}{_count}";
+        }
+        public override string ToString()
+        {
+            return $"Ischinin Kodu : {No}" +
+                $"\nIshcininadi adi ve soyadi : {FullName}" +
+                $"\n Iscinin Maasi : {_salary}" +
+                $"\n Iscinin Vezifesi: {_position}" +
+                $"\n Iscinin islediyi Departament{DepartmentName}";
         }
     }
     

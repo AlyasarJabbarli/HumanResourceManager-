@@ -30,7 +30,7 @@ namespace HumanResourceManager.Models
                 while (value < 1) 
                 {
                     Console.WriteLine("Departmanetde maximum var ola bilicek isci sayi minimum 1 ola biler");
-                    value = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine() , out value);
                 }
                 _workerlimit = value;
                
@@ -45,7 +45,7 @@ namespace HumanResourceManager.Models
                 while (value < WorkerLimit*250)
                 {
                     Console.WriteLine("Maas A.R Qanunvericiliyine uygun olaraq bir isci ucun 250 AZN den az ola bilmez");
-                    value = double.Parse(Console.ReadLine());
+                    double.TryParse(Console.ReadLine() , out value);
                 }
                 _salarylimit = value;
             }

@@ -129,19 +129,12 @@ namespace HumanResourceManager
                 Console.WriteLine("Duzgun Departament adi daxil edin");
                 oldname = Console.ReadLine();
             }
-            string newname = "";
-            foreach (Department department in humanResourceManager.Departments)
+            Console.WriteLine("Departamentin yeni adini daxil edin");
+            string newname = Console.ReadLine();
+            while (!Regex.IsMatch(newname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(newname, @"^\S+(?: \S+)*$"))
             {
-                if (department.Name == oldname.Trim().ToUpper())
-                {
-                    Console.WriteLine("Departamentin yeni adini daxil edin");
-                    newname = Console.ReadLine();
-                   while (!Regex.IsMatch(newname,@"\A[\p{L}\s]+\Z") || !Regex.IsMatch(newname, @"^\S+(?: \S+)*$"))
-                   {
-                       Console.WriteLine("Duzgun Departament adi daxil edin");
-                       newname = Console.ReadLine();
-                   }                  
-                }
+                Console.WriteLine("Duzgun Departament adi daxil edin");
+                newname = Console.ReadLine();
             }
             humanResourceManager.Editdepartment(oldname ,newname);
         }
@@ -222,7 +215,7 @@ namespace HumanResourceManager
             }
             Console.WriteLine("Ishcini elave etmek istediyiniz departmentin adini daxil edin");
             string departmentname = Console.ReadLine();
-            while (string.IsNullOrWhiteSpace(departmentname))
+            while (!Regex.IsMatch(departmentname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(departmentname, @"^\S+(?: \S+)*$"))
             {
                 Console.WriteLine("duzgun department adi daxil edin");
                 departmentname = Console.ReadLine();
@@ -231,7 +224,7 @@ namespace HumanResourceManager
             Console.WriteLine("ishcinin AD VE SOYADINI DAXIL EDIN");
             string fullname = Console.ReadLine();
 
-            while (string.IsNullOrWhiteSpace(fullname))
+            while (!Regex.IsMatch(fullname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(fullname, @"^\S+(?: \S+)*$"))
             {
                 Console.WriteLine("ishcinin AD VE SOYADINI DUZGUN DAXIL EDIN");
                 fullname = Console.ReadLine();
@@ -239,7 +232,7 @@ namespace HumanResourceManager
 
             Console.WriteLine("ishcinin vezifesini daxil edin");
             string position = Console.ReadLine();
-            while (string.IsNullOrWhiteSpace(position))
+            while (!Regex.IsMatch(position, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(position, @"^\S+(?: \S+)*$"))
             {
                 Console.WriteLine("ishcinin vezifesini duzgun daxil edin");
                 position = Console.ReadLine();
@@ -248,7 +241,7 @@ namespace HumanResourceManager
             Console.WriteLine("ishcinin maasini daxil edin");
             string salarystr = Console.ReadLine();
             double salarynum;
-            while (string.IsNullOrWhiteSpace(salarystr) || (double.TryParse(salarystr,out salarynum)))
+            while (string.IsNullOrWhiteSpace(salarystr) || (!double.TryParse(salarystr,out salarynum)))
             {
                 Console.WriteLine("ishcinin maasini duzgun daxil edin");
                 salarystr = Console.ReadLine();
@@ -282,32 +275,31 @@ namespace HumanResourceManager
             {
                 foreach (Employee employee in department.Employees)
                 {
-                    if (employee.No == no.Trim().ToUpper())
-                    {
-                        Console.WriteLine(employee.FullName, employee.Salary, employee.Position);
-                        Console.WriteLine("ishcinin Yeni vezifesini daxil edin");
-                        string position = Console.ReadLine();
-                        while (string.IsNullOrWhiteSpace(position))
-                        {
-                            Console.WriteLine("ishcinin YEni vezifesini duzgun daxil edin");
-                            position = Console.ReadLine();
-                        }
-
-                        Console.WriteLine("ishcinin Yeni maasini daxil edin");
-                        string salarystr = Console.ReadLine();
-                        double salarynum;
-                        while (string.IsNullOrWhiteSpace(salarystr) || (double.TryParse(salarystr, out salarynum) || salarynum<250))
-                        {
-                            Console.WriteLine("ishcinin Yeni maasini duzgun daxil edin");
-                            salarystr = Console.ReadLine();
-                        }
-                        humanResourceManager.EditEmployee(no,position, salarynum);
-                    }
+                    Console.WriteLine(employee.FullName);
+                    Console.WriteLine(employee.Position);
+                    Console.WriteLine(employee.Salary);
                 }
             }
+            Console.WriteLine("ishcinin Yeni vezifesini daxil edin");
+            string position = Console.ReadLine();
+            while (!Regex.IsMatch(position, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(position, @"^\S+(?: \S+)*$"))
+            {
+                Console.WriteLine("ishcinin YEni vezifesini duzgun daxil edin");
+                position = Console.ReadLine();
+            }
+
+            Console.WriteLine("ishcinin Yeni maasini daxil edin");
+            string salarystr = Console.ReadLine();
+            double salarynum;
+            while (string.IsNullOrWhiteSpace(salarystr) || (double.TryParse(salarystr, out salarynum) || salarynum < 250))
+            {
+                Console.WriteLine("ishcinin Yeni maasini duzgun daxil edin");
+                salarystr = Console.ReadLine();
+            }
+            humanResourceManager.EditEmployee(no, position, salarynum);
 
         }
-        static void RemoveEmployee(ref HumanResourceService humanResourceManager) 
+        static void RemoveEmployee(ref HumanResourceService humanResourceManager)
         {
             if (humanResourceManager.Departments.Length > 0)
             {
@@ -322,36 +314,21 @@ namespace HumanResourceManager
                 Console.WriteLine("Once Sisteme Departament elave edin");
                 return;
             }
-            Console.WriteLine("Ishcini elave etmek istediyiniz departmentin adini daxil edin");
+            Console.WriteLine("Ishcini Silmek istediyiniz departmentin adini daxil edin");
             string departmentname = Console.ReadLine();
-            while (string.IsNullOrWhiteSpace(departmentname))
+            while (!Regex.IsMatch(departmentname, @"\A[\p{L}\s]+\Z") || !Regex.IsMatch(departmentname, @"^\S+(?: \S+)*$"))
             {
                 Console.WriteLine("duzgun department adi daxil edin");
                 departmentname = Console.ReadLine();
             }
-            foreach(Department department in humanResourceManager.Departments)
+            Console.WriteLine("Ishcinin kodunu daxil edin");
+            string no = Console.ReadLine();
+            while (string.IsNullOrWhiteSpace(no))
             {
-                if(department.Name == departmentname) 
-                {
-                    Console.WriteLine("Ishcinin kodunu daxil edin");
-                    string no = Console.ReadLine();
-                    while (string.IsNullOrWhiteSpace(no))
-                    {
-                        Console.WriteLine("duzgun Ishci kodu daxil edin");
-                        no = Console.ReadLine();
-                    }
-                    for (int i = 0; i < department.Employees.Length; i++)
-                    {
-                        if(department.Employees[i].No == no.Trim().ToUpper()) 
-                        {
-                            department.Employees[i] = department.Employees[department.Employees.Length - 1];
-                            Array.Resize(ref department.Employees, department.Employees.Length - 1);
-                            humanResourceManager.RemoveEmployee(no, departmentname);
-                        }
-                    } 
-                    
-                }
+                Console.WriteLine("duzgun Ishci kodu daxil edin");
+                no = Console.ReadLine();
             }
+            humanResourceManager.RemoveEmployee(no, departmentname);
         }
     }
 }

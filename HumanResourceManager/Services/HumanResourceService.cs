@@ -70,7 +70,8 @@ namespace HumanResourceManager.Services
                 foreach (Employee employee in department.Employees)
                 {
                     if (employee.No == no.Trim().ToUpper())
-                    {
+                    {                 
+                        Console.WriteLine(employee.FullName , employee.Position , employee.Salary);
                         employee.Position = position;
                         employee.Salary = salary;
                         return;
