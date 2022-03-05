@@ -32,10 +32,10 @@ namespace HumanResourceManager.Models
                 while (value < 250)
                 {
                     Console.WriteLine("Maas A.R Qanunvericiliyine uygun olaraq 250 AZN den az ola bilmez");
-                    //value = double.Parse(Console.ReadLine());
                     double.TryParse(Console.ReadLine(), out value);
                 }
                 _salary = value;
+                Console.WriteLine("Emeliyyat Ugurla Yekunlasdi");
             } 
         }
         public string DepartmentName { get; set; }

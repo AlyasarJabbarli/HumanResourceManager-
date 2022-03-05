@@ -48,6 +48,7 @@ namespace HumanResourceManager.Models
                     double.TryParse(Console.ReadLine() , out value);
                 }
                 _salarylimit = value;
+                Console.WriteLine("Emaliyyat Ugurla Yekunlasdi");
             }
         }
         public Employee[] Employees;

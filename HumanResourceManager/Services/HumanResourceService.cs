@@ -57,11 +57,16 @@ namespace HumanResourceManager.Services
             {
                if(department.Name  == oldname.Trim().ToUpper())
                {
-                    department.Name = newname;
+                    if (department.Name == newname.Trim().ToUpper())
+                    {
+                        Console.WriteLine("Departmentin yeni adi kohne adiyla bir ola bilmez");
+                        return;
+                    }
+                    department.Name = newname.Trim().ToUpper();
                     foreach (Employee employee in department.Employees)
                     {
                         employee.No = employee.No.Replace(employee.No[0], char.ToUpper(department.Name.ToString()[0]));
-                        employee.No = employee.No.Replace(employee.No[1], char.ToUpper(department.Name.ToString()[1]));
+                        employee.No = employee.No.Replace(employee.No[1], char.ToUpper(department.Name .ToString()[1]));
                     }
                     return;
                }
@@ -126,6 +131,7 @@ namespace HumanResourceManager.Services
                                 department.Employees[i] = null;
                                 department.Employees[i] = department.Employees[department.Employees.Length - 1];
                                 Array.Resize(ref department.Employees, department.Employees.Length - 1);
+                                Console.WriteLine("Ishci Sistemden Ugurla Silindi");
                                 return;
                             }
                         }
