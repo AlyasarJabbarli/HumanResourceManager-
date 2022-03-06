@@ -14,7 +14,6 @@ namespace HumanResourceManager.Services
         public HumanResourceService()
         {
             _departments = new Department[0];
-
         }
         public void AddDepartment(string name, int workerlimit, double salarylimit)
         {
@@ -63,6 +62,7 @@ namespace HumanResourceManager.Services
                         return;
                     }
                     department.Name = newname.Trim().ToUpper();
+                    Console.WriteLine("Departmentin adi Ugurla Deyisildi");
                     foreach (Employee employee in department.Employees)
                     {
                         employee.No = employee.No.Replace(employee.No[0], char.ToUpper(department.Name.ToString()[0]));
@@ -83,8 +83,12 @@ namespace HumanResourceManager.Services
                 foreach (Employee employee in department.Employees)
                 {
                     if (employee.No == no.Trim().ToUpper())
-                    {                 
-                        Console.WriteLine(employee.FullName , employee.Position , employee.Salary);
+                    {
+                        if(employee.Position == position && employee.Salary == salary) 
+                        {
+                            Console.WriteLine("Vezife ve Emek haqqi Birinde deyisiklik etmek mutleqdir");
+                            return;
+                        }
                         employee.Position = position;
                         employee.Salary = salary;
                         return;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HumanResourceManager.Models
 {
-    class Employee
+    class Employee 
     {
         private static int _count = 1000;
         public string No;
@@ -31,19 +31,18 @@ namespace HumanResourceManager.Models
             {
                 while (value < 250)
                 {
-                    Console.WriteLine("Maas A.R Qanunvericiliyine uygun olaraq 250 AZN den az ola bilmez");
+                    Console.WriteLine($"Emek Haqqi A.R Qanunvericiliyine uygun olaraq 250 AZN den az ola bilmez");
                     double.TryParse(Console.ReadLine(), out value);
                 }
                 _salary = value;
-                Console.WriteLine("Emeliyyat Ugurla Yekunlasdi");
             } 
         }
         public string DepartmentName { get; set; }
         public Employee(string fullname ,  string position , double salary , string departmentname) 
         {
             _count++;
-            FullName = fullname.Trim().ToUpper();
-            Position = position;
+            FullName = fullname.Trim();
+            Position = position.Trim().ToUpper();
             Salary = salary;
             DepartmentName = departmentname.ToUpper();
             No = $"{(DepartmentName.ToString()[0])}{(DepartmentName.ToString()[1])}{_count}";
@@ -54,7 +53,7 @@ namespace HumanResourceManager.Models
                 $"\nIshcininadi adi ve soyadi : {FullName}" +
                 $"\n Iscinin Maasi : {_salary}" +
                 $"\n Iscinin Vezifesi: {_position}" +
-                $"\n Iscinin islediyi Departament{DepartmentName}";
+                $"\n Iscinin islediyi Departament : {DepartmentName}";
         }
     }
     

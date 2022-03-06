@@ -36,7 +36,7 @@ namespace HumanResourceManager.Models
                
             }
         }
-        private double _salarylimit;
+        protected double _salarylimit;
         public double SalaryLimit 
         {
             get => _salarylimit;
@@ -44,7 +44,7 @@ namespace HumanResourceManager.Models
             {
                 while (value < WorkerLimit*250)
                 {
-                    Console.WriteLine($"Maas A.R Qanunvericiliyine uygun olaraq bir isci ucun 250 AZN den az ola bilmez , Ve bu department ucun minimum {_workerlimit*250}AZN olmalidir");
+                    Console.WriteLine($"Emek Haqqi A.R Qanunvericiliyine uygun olaraq bir isci ucun 250 AZN den az ola bilmez , Ve bu department ucun umumi emek haqqi budce limiti {_workerlimit*250}AZN olmalidir");
                     double.TryParse(Console.ReadLine() , out value);
                 }
                 _salarylimit = value;
@@ -75,6 +75,7 @@ namespace HumanResourceManager.Models
             {
                 Array.Resize(ref Employees, Employees.Length + 1);
                 Employees[Employees.Length - 1] = employee;
+                Console.WriteLine("Emeliyyat Ugurla Yekunlasdi");
             }
             else 
             {
@@ -84,8 +85,8 @@ namespace HumanResourceManager.Models
         public override string ToString()
         {
             return $"Departamentin adi : {_name}" +
-                $"\n Departamentde ola bilecek maksimum isci sayi : {_workerlimit}" +
-                $"\n Verilebilecek minimum maas: {_salarylimit}";
+                $"\n Departmanetde maximum var ola bilicek isci sayi : {_workerlimit}" +
+                $"\n Departamentde butun iscilere ayliq cemi verilecek maximum meblegi: {_salarylimit}";
         }
     }
 }
