@@ -98,12 +98,12 @@ namespace HumanResourceManager
                 Console.WriteLine("Duzgun Daxil Edin,Minimal Ishci sayi 1 den az ola bilmez , Maksimal ishci sayi 40 dan cox ola bilmez");
                 workerlimitstr = Console.ReadLine();
             }
-            Console.WriteLine("Emek haqqi limitini teyin edin");
+            Console.WriteLine("Umumi budce limitini teyin edin");
             string salarylimitstr = Console.ReadLine();
             double salarylimitnum;
             while (!double.TryParse(salarylimitstr, out salarylimitnum))
             {
-                Console.WriteLine("Emek haqqini Duzgun Daxil Edin");
+                Console.WriteLine("Umumi budce limitini Duzgun Daxil Edin");
                 salarylimitstr = Console.ReadLine();
             }
             humanResourceManager.AddDepartment(departmentname, workerlimitnum, salarylimitnum);
@@ -143,7 +143,7 @@ namespace HumanResourceManager
         }
         static void ShowAllEployeers(ref HumanResourceService humanResourceManager) 
         {
-            if (humanResourceManager.Departments.Length < 0)
+            if (humanResourceManager.Departments.Length == 0)
             {
                 Console.WriteLine("Once departament elave edin");
                 return;

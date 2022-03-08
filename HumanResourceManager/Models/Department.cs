@@ -36,7 +36,7 @@ namespace HumanResourceManager.Models
                
             }
         }
-        protected double _salarylimit;
+        internal double _salarylimit;
         public double SalaryLimit 
         {
             get => _salarylimit;
@@ -62,6 +62,9 @@ namespace HumanResourceManager.Models
             double AverageSalary = salarysum / Employees.Length;
             Console.WriteLine(AverageSalary);
         }
+        public Department() 
+        { 
+        }
         public Department(string name,int workerlimit,double salarylimit) 
         {
             Employees = new Employee[0];
@@ -86,7 +89,7 @@ namespace HumanResourceManager.Models
         {
             return $"Departamentin adi : {_name}" +
                 $"\n Departmanetde maximum var ola bilicek isci sayi : {_workerlimit}" +
-                $"\n Departamentde butun iscilere ayliq cemi verilecek maximum meblegi: {_salarylimit}";
+                $"\n Departamentin umumi budce limiti : {_salarylimit}";
         }
     }
 }

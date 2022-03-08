@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HumanResourceManager.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HumanResourceManager.Models
 {
-    class Employee 
+    class Employee : Department 
     {
         private static int _count = 1000;
         public string No;
@@ -24,10 +25,10 @@ namespace HumanResourceManager.Models
             }
         }
         public double _salary;
-        public double Salary 
+        public double Salary
         {
             get => _salary;
-            set 
+            set
             {
                 while (value < 250)
                 {
@@ -35,9 +36,11 @@ namespace HumanResourceManager.Models
                     double.TryParse(Console.ReadLine(), out value);
                 }
                 _salary = value;
-            } 
+            }
         }
         public string DepartmentName { get; set; }
+
+        HumanResourceService humanResourceManager = new HumanResourceService();
         public Employee(string fullname ,  string position , double salary , string departmentname) 
         {
             _count++;
